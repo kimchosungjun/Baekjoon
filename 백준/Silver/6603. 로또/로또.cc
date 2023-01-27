@@ -1,14 +1,12 @@
 #include<iostream>
-#include<algorithm>
-#include<cmath>
-#include<queue>
-#define setting ios::sync_with_stdio(NULL), cin.tie(NULL), cout.tie(NULL)
+
 using namespace std;
 
 int arr[15];
-int ans[15] = { 0, };
+int ans[15];
 bool visited[15];
 int k;
+
 int maxi;
 
 void go(int loc) {
@@ -23,34 +21,36 @@ void go(int loc) {
 		for (int i = 0; i < 6; i++) {
 			cout << ans[i] << ' ';
 		}
-		cout <<'\n';
-		return;
+		cout << '\n';
 	}
 	else {
 		for (int i = 0; i < k; i++) {
 			if (!visited[i]) {
-				ans[loc] = arr[i];
 				visited[i] = true;
+				ans[loc] = arr[i];
 				go(loc + 1);
-				ans[loc] = 0;
 				visited[i] = false;
+				ans[loc] = 0;
 			}
 		}
 	}
+
+
 }
 
 int main() {
-	setting;
-	int num;
-	cin >> k;
-	while (k != 0) {
+
+	while (true) {
+		cin >> k;
+		if (k == 0)
+			break;
 		for (int i = 0; i < k; i++) {
-			cin >> num;
-			arr[i] = num;
+			cin >> arr[i];
 		}
 		go(0);
-		cout << '\n';
-		cin >> k;
+		cout << endl;
 	}
+	
+
 	return 0;
 }
